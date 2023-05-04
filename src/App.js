@@ -7,6 +7,7 @@ import Profile from "./Components/Profile"
 import  Setting from "./Components/Setting"
 import Home from "./Components/Home"
 import Signup from "./Components/Signup"
+
 function App() {
   return (
     <div className="App">
@@ -23,7 +24,9 @@ function App() {
     
 
     </Routes>
+
      </BrowserRouter>
+    
     </div>
       
         

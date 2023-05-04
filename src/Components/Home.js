@@ -11,38 +11,17 @@ import {Link} from "react-router-dom"
 function Home() {
   return (
     <div>
-       <nav className="navbar">
+       <div class="topnav">
+  <Link to="/"  >Home</Link>
+  <Link to="/About"  >About</Link>
+  <Link to="/Signup">Signup</Link>
+  <Link to="/Login">SignIn</Link>
 
-<div className="logo">MENU</div>
+</div>
+{/* <div style={{paddingLeft:'10px'}}>
 
-
-<ul className="nav-links">
-
-
-  {/* <input type="checkbox" id="checkbox_toggle" />
-<label className="hamburger">&#9776;</label> */}
-
-
-  <div className="menu">
-
-    <li><Link to="/">Home</Link></li>
-    <li><Link to="/About">About</Link></li>
-
-    <li className="Services">
-      <li><Link to="/">Service</Link></li>
-      <ul className="dropdown">
-        <li><Link to="/profile">profile</Link></li>
-        <li><Link to="/setting">Settings</Link></li>
-
-      </ul>
-
-    </li>
-
-    <li><Link to="/signin">Login</Link></li>
-    <li><Link to="/signup">Signup</Link></li>
-  </div>
-</ul>
-</nav>
+ 
+</div> */}
     </div>
   )
 }
