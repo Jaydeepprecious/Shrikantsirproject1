@@ -7,7 +7,7 @@ import Container from 'react-bootstrap/Container';
 
 import { NavDropdown } from 'react-bootstrap';
 const Signup1 = () => {
-  const [name, setName] = useState("");
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const[nameError,setNameError]=useState("");
@@ -26,31 +26,21 @@ const Signup1 = () => {
     if(password==='')
     setPasswordError("please enter your password")
     if(email!==''&&password!=='')
-{
+    {
 
     
 
-     
-    axios.post("https://reqres.in/api/login", {
-      
+     alert("Sigup Successfully");
+    axios.post("https://reqres.in/api/register", {
+    
       email: email,
       password:password,
       header,
     })
     .then((res)=>{
-
-      console.log(res.data)
-       const token1="QpwL5tke4Pnpja7X4";
-       const token2=localStorage.getItem('token')
-       if(token1===token2)
-       {
-        alert("SignIn is Successfully!!")
-        history("/Home");
-       }
-       else
-       {
-          alert("Invalid email id and password");
-       }
+    const token="QpwL5tke4Pnpja7X4";
+    localStorage.setItem('token',token)
+     history("/Login");
      });
 
   }
@@ -92,10 +82,10 @@ const Signup1 = () => {
           </Nav>
         </Container>
       </Navbar>
-    <h1>LogIn page</h1>
+    <h1>Signup page</h1>
       <form className="mt-5 mx-auto" style={{maxWidth:"400px"}}>
         
-
+          
         <div className="mb-3">
           <label className="form-label">Email address</label>
           <input
