@@ -51,6 +51,9 @@ body {
     border-bottom-right-radius: .3rem;
   }
 }
-
+.pic{
+  height: 500px;
+  width: 300px;
+}
 
   

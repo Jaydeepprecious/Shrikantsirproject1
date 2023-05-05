@@ -39,7 +39,8 @@ const Signup1 = () => {
     })
     .then((res)=>{
     const token="QpwL5tke4Pnpja7X4";
-    localStorage.setItem('token',token)
+    const t=localStorage.setItem('token',token)
+    console.log(t);
      history("/Login");
      });
 

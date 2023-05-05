@@ -40,6 +40,10 @@ code {
     border-bottom-right-radius: .3rem;
   }
 }
-
+.centerImage{
+  height: 500px;
+  display: block;
+  margin: auto;
+}
 
   

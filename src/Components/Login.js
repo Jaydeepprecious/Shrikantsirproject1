@@ -7,12 +7,12 @@ import Container from 'react-bootstrap/Container';
 
 import { NavDropdown } from 'react-bootstrap';
 const Signup1 = () => {
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const[emailError,setEmailError]=useState("");
-  const[passwordError,setPasswordError]=useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const history = useNavigate();
   const header = { "Access-Control-Allow-Origin": "*" };
 
@@ -20,65 +20,64 @@ const Signup1 = () => {
   const handleSubmit = (e) => {
 
     e.preventDefault();
-    
-    if(email==='')
-    setEmailError("please enter your email")
-    if(password==='')
-    setPasswordError("please enter your password")
-    if(email!==''&&password!==''&&email==="eve.holt@reqres.in")
-{
 
-    
+    if (email === '')
+      setEmailError("please enter your email")
+    if (password === '')
+      setPasswordError("please enter your password")
+    if (email !== '' && password !== '') {
 
-     
-    axios.post("https://reqres.in/api/login", {
-      
-      email: email,
-      password:password,
-      header,
-    })
-    .then((res)=>{
 
-      console.log(res.data)
-       const token1="QpwL5tke4Pnpja7X4";
-       const token2=localStorage.getItem('token')
-       if(token1===token2)
-       {
-        alert("SignIn is Successfully!!")
-        localStorage.removeItem('token');
-        history("/Home");
-        alert("your account logout successfully")
-       }
-      
-     });
 
-  }
-  else
-   {
-    alert("invalid email address");
-   }
+      if (email === "eve.holt@reqres.in") {
+        axios.post("https://reqres.in/api/login", {
 
+          email: email,
+          password: password,
+          header,
+        })
+          .then((res) => {
+
+            console.log(res.data)
+            const token1 = "QpwL5tke4Pnpja7X4";
+            const token2 = localStorage.getItem('token')
+            console.log(token2);
+            if (token1 === token2) {
+              alert("SignIn is Successfully!!")
+              const token3=localStorage.removeItem('token');
+              console.log(token3)
+              history("/Home");
+
+            }
+            alert("your account logout successfully")
+          });
+
+      }
+      else {
+        alert("invalid email address");
+      }
+    }
   };
- 
-  const handleEmailChange=(event)=>{
+
+  const handleEmailChange = (event) => {
     setEmail(event.target.value);
-    if(event.target.value==='')
-    setEmailError("please enter your email");
-    else{
-        setEmailError("");
+    if (event.target.value === '')
+      setEmailError("please enter your email");
+    else {
+      setEmailError("");
     }
   }
-  const handlePasswordChange=(event)=>{
+  const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-    if(event.target.value==='')
-    setPasswordError("please enter your password");
-    else{
-        setPasswordError("");
+    if (event.target.value === '')
+      setPasswordError("please enter your password");
+    else {
+      setPasswordError("");
     }
   }
   return (
     <>
-     <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">Menu</Navbar.Brand>
           <Nav className="me-auto">
@@ -91,14 +90,14 @@ const Signup1 = () => {
               <NavDropdown.Item href="Profile">Profile</NavDropdown.Item>
               <NavDropdown.Item href="Setting">
                 Setting
-              </NavDropdown.Item> 
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Container>
       </Navbar>
-    <h1>LogIn page</h1>
-      <form className="mt-5 mx-auto" style={{maxWidth:"400px"}}>
-        
+      <h1>LogIn page</h1>
+      <form className="mt-5 mx-auto" style={{ maxWidth: "400px" }}>
+
 
         <div className="mb-3">
           <label className="form-label">Email address</label>
@@ -108,7 +107,7 @@ const Signup1 = () => {
             aria-describedby="emailHelp" required
             onChange={handleEmailChange}
           />
-          {emailError&&<span style={{color:'red'}}>{emailError}</span>}
+          {emailError && <span style={{ color: 'red' }}>{emailError}</span>}
         </div>
         <div className="mb-3">
           <label className="form-label">Password</label>
@@ -118,7 +117,7 @@ const Signup1 = () => {
             aria-describedby="emailHelp" required
             onChange={handlePasswordChange}
           />
-          {passwordError&&<span style={{color:'red'}}>{passwordError}</span>}
+          {passwordError && <span style={{ color: 'red' }}>{passwordError}</span>}
         </div>
 
         <button

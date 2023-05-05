@@ -58,7 +58,7 @@ localStorage.setItem("password",password);
       </Navbar>
 
     <div className="d-flex justify-content-between m-2">
-      <h2>Read Operation</h2>
+      <h2>Profile</h2>
       <Link to="/">
       <button className="btn btn-primary" >Create</button>
       </Link>

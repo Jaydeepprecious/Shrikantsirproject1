@@ -48,8 +48,10 @@ function Home() {
             </NavDropdown>
           </Nav>
         </Container>
-      </Navbar>
-
+      </Navbar> 
+         
+     <img src="precious.png" alt="pic" className='centerImage'/>
+     
     </div>
 
   )
