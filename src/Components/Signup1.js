@@ -4,8 +4,12 @@ import { useNavigate } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { NavDropdown } from 'react-bootstrap';
+
+
+
 const Signup1 = () => {
   
   const [email, setEmail] = useState("");
@@ -30,7 +34,14 @@ const Signup1 = () => {
 
     
 
-     alert("Sigup Successfully");
+      
+      //alert("LogIn Successfully ")
+      // toast.success("SignUp Successfully!",{
+      //   autoClose: 15000,
+      //   position:"top-center",
+        
+        
+      // });
     axios.post("https://reqres.in/api/register", {
     
       email: email,
@@ -115,6 +126,7 @@ const Signup1 = () => {
         >
           Submit
         </button>
+        <ToastContainer autoClose={8000}/>
       </form>
     </>
   );

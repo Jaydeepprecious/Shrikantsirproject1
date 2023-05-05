@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { NavDropdown } from 'react-bootstrap';
 const Signup1 = () => {
 
@@ -43,18 +44,29 @@ const Signup1 = () => {
             const token2 = localStorage.getItem('token')
             console.log(token2);
             if (token1 === token2) {
-              alert("SignIn is Successfully!!")
-              const token3=localStorage.removeItem('token');
-              console.log(token3)
-              history("/Home");
-
+              
+              //const token3=localStorage.removeItem('token');
+             // console.log(token3)
+              history("/Dashboard");
+             
             }
-            alert("your account logout successfully")
+            
+          });
+          toast.success("LogIn Successfully!",{
+              
+            position:"top-center",
+            
+            
           });
 
       }
       else {
-        alert("invalid email address");
+        toast.error("Invalid email address!",{
+              
+          position:"top-center",
+          
+          
+        });
       }
     }
   };
@@ -127,6 +139,7 @@ const Signup1 = () => {
         >
           Submit
         </button>
+        <ToastContainer />
       </form>
     </>
   );

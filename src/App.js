@@ -9,6 +9,7 @@ import Home from "./Components/Home"
 import Signup1 from "./Components/Signup1"
 import Contact from './Components/Contact';
 import Menu from './Components/Menu';
+import Dashboard from './Components/Dashboard';
 function App() {
   return (
     <div className="App">
@@ -18,6 +19,7 @@ function App() {
         <Routes>
         <Route path="/" element={<Menu/>} />
           <Route path="/Home" element={<Home />} />
+          <Route exact path="/Dashboard" element={<Dashboard />} />
           <Route exact path="/About" element={<About />} />
           <Route exact path="/Login" element={<Login />} />
           <Route exact path="/Signup" element={<Signup1 />} />
