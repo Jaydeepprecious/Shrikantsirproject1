@@ -7,10 +7,10 @@ import Container from 'react-bootstrap/Container';
 
 import { NavDropdown } from 'react-bootstrap';
 const Signup1 = () => {
-  const [name, setName] = useState("");
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const[nameError,setNameError]=useState("");
+
   const[emailError,setEmailError]=useState("");
   const[passwordError,setPasswordError]=useState("");
   const history = useNavigate();
@@ -25,7 +25,7 @@ const Signup1 = () => {
     setEmailError("please enter your email")
     if(password==='')
     setPasswordError("please enter your password")
-    if(email!==''&&password!=='')
+    if(email!==''&&password!==''&&email==="eve.holt@reqres.in")
 {
 
     
@@ -45,15 +45,19 @@ const Signup1 = () => {
        if(token1===token2)
        {
         alert("SignIn is Successfully!!")
+        localStorage.removeItem('token');
         history("/Home");
+        alert("your account logout successfully")
        }
-       else
-       {
-          alert("Invalid email id and password");
-       }
+      
      });
 
   }
+  else
+   {
+    alert("invalid email address");
+   }
+
   };
  
   const handleEmailChange=(event)=>{
