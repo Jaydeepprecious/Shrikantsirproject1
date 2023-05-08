@@ -1,12 +1,27 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
+import Container from 'react-bootstrap/Container';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Dashboard() {
     const history = useNavigate();
     function handleSubmit(){
-        alert("Logout Successfully")
+       try {
+        toast.success("LogOut Successfully!",{
+          autoClose: 15000,
+          position:"top-center",
+          
+          
+        });
+       } catch (error) {
+         console.log(error)
+       }  
+     
 
         const token3=localStorage.removeItem('token');
          console.log(token3)
+             
+      
          history("/Login");
     }
   return (
@@ -19,6 +34,7 @@ function Dashboard() {
         >
           Logout
         </button>
+        <ToastContainer />
     </div>
   )
 }

@@ -35,13 +35,13 @@ const Signup1 = () => {
     
 
       
-      //alert("LogIn Successfully ")
-      // toast.success("SignUp Successfully!",{
-      //   autoClose: 15000,
-      //   position:"top-center",
+      
+      toast.success("SignUp Successfully!",{
+        autoClose: 15000,
+        position:"top-center",
         
         
-      // });
+      });
     axios.post("https://reqres.in/api/register", {
     
       email: email,
