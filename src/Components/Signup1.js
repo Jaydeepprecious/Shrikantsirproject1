@@ -7,76 +7,99 @@ import Container from 'react-bootstrap/Container';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavDropdown } from 'react-bootstrap';
-
-
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import PasswordStrengthBar from 'react-password-strength-bar';
+import Validate from "./Validate";
 
 const Signup1 = () => {
-  
+  const [isHighlighted, setIsHighlighted] = useState(false);
+  const [isHighlighted1, setIsHighlighted1] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
-  const[emailError,setEmailError]=useState("");
-  const[passwordError,setPasswordError]=useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
+  
   const history = useNavigate();
   const header = { "Access-Control-Allow-Origin": "*" };
 
+  const togglePassword = (e) => {
+    e.preventDefault();
+    if (passwordType === "password") {
+      setPasswordType("text")
+      return;
+    }
+    setPasswordType("password")
+  }
 
   const handleSubmit = (e) => {
 
     e.preventDefault();
-    
-    if(email==='')
-    setEmailError("please enter your email")
-    if(password==='')
-    setPasswordError("please enter your password")
-    if(email!==''&&password!=='')
-    {
 
-    
+    if (email === '')
+      setEmailError("please enter your email")
+    if (password ==='')
+      setPasswordError("please enter your password")
+    if (email !== '' && password!== '') {
 
-      
-      
-      toast.success("SignUp Successfully!",{
+
+
+
+
+      toast.success("SignUp Successfully!", {
         autoClose: 15000,
-        position:"top-center",
-        
-        
-      });
-    axios.post("https://reqres.in/api/register", {
-    
-      email: email,
-      password:password,
-      header,
-    })
-    .then((res)=>{
-    const token="QpwL5tke4Pnpja7X4";
-    const t=localStorage.setItem('token',token)
-    console.log(t);
-     history("/Login");
-     });
+        position: "top-center",
 
-  }
+
+      });
+      axios.post("https://reqres.in/api/register", {
+
+        email: email,
+        password: password,
+        header,
+      })
+        .then((res) => {
+          const token = "QpwL5tke4Pnpja7X4";
+          const t = localStorage.setItem('token', token)
+          console.log(t);
+          history("/Login");
+        });
+
+    }
   };
- 
-  const handleEmailChange=(event)=>{
+
+  const handleEmailChange = (event) => {
     setEmail(event.target.value);
-    if(event.target.value==='')
-    setEmailError("please enter your email");
-    else{
-        setEmailError("");
+    if (event.target.value === '')
+      setEmailError("please enter your email");
+    else {
+      setEmailError("");
     }
   }
-  const handlePasswordChange=(event)=>{
-    setPassword(event.target.value);
-    if(event.target.value==='')
-    setPasswordError("please enter your password");
-    else{
-        setPasswordError("");
+  const handlePasswordChange = (evnt) => {
+    setPassword(evnt.target.value);
+    if (evnt.target.value === '' || password=== "")
+      setPasswordError("please enter your password");
+    else {
+      setPasswordError("");
     }
+  }
+  function handleFocus() {
+    setIsHighlighted(true);
+  }
+  function handleBlur() {
+    setIsHighlighted(false);
+  }
+  function handleFocus1() {
+    setIsHighlighted1(true);
+  }
+  function handleBlur1() {
+    setIsHighlighted1(false);
   }
   return (
     <>
-     <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">Menu</Navbar.Brand>
           <Nav className="me-auto">
@@ -89,34 +112,43 @@ const Signup1 = () => {
               <NavDropdown.Item href="Profile">Profile</NavDropdown.Item>
               <NavDropdown.Item href="Setting">
                 Setting
-              </NavDropdown.Item> 
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
         </Container>
       </Navbar>
-    <h1>Signup page</h1>
-      <form className="mt-5 mx-auto" style={{maxWidth:"400px"}}>
-        
-          
+      <h1>Signup page</h1>
+      <form className="mt-5 mx-auto" style={{ maxWidth: "400px" }}>
+
+
         <div className="mb-3">
           <label className="form-label">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            aria-describedby="emailHelp" required
-            onChange={handleEmailChange}
-          />
-          {emailError&&<span style={{color:'red'}}>{emailError}</span>}
+          <div className="input-group my-4 ">
+
+            <input
+              type="email"
+              className="form-control" id={isHighlighted ? "highlight" : ""}
+              aria-describedby="emailHelp" required
+              onChange={handleEmailChange} onFocus={handleFocus} onBlur={handleBlur}
+            />
+
+          </div>
+          {emailError && <span style={{ color: 'red' }}>{emailError}</span>}
         </div>
         <div className="mb-3">
           <label className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            aria-describedby="emailHelp" required
-            onChange={handlePasswordChange}
-          />
-          {passwordError&&<span style={{color:'red'}}>{passwordError}</span>}
+          <div className="input-group"> 
+            <input type={passwordType} id={isHighlighted1 ? "highlight1" : ""} onChange={handlePasswordChange} name="password" class="form-control" placeholder="Password" onFocus={handleFocus1} onBlur={handleBlur1}   />
+           
+            <div className="input-group-btn">
+              <button className="btn btn-outline-primary" onClick={togglePassword}>
+                {passwordType === "password" ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+           
+          </div> 
+          <PasswordStrengthBar password={password}/>
+          {passwordError && <span style={{ color: 'red' }}>{passwordError}</span>}  <br />
         </div>
 
         <button
@@ -126,7 +158,7 @@ const Signup1 = () => {
         >
           Submit
         </button>
-        <ToastContainer autoClose={8000}/>
+        <ToastContainer autoClose={8000} />
       </form>
     </>
   );

@@ -7,8 +7,11 @@ import Container from 'react-bootstrap/Container';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavDropdown } from 'react-bootstrap';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Signup1 = () => {
-
+  const [passwordType, setPasswordType] = useState("password");
+  const[isHighlighted,setIsHighlighted]=useState(false);
+  const[isHighlighted1,setIsHighlighted1]=useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,6 +20,14 @@ const Signup1 = () => {
   const history = useNavigate();
   const header = { "Access-Control-Allow-Origin": "*" };
 
+  const togglePassword = (e) => {
+    e.preventDefault();
+    if (passwordType === "password") {
+      setPasswordType("text")
+      return;
+    }
+    setPasswordType("password")
+  }
 
   const handleSubmit = (e) => {
 
@@ -87,6 +98,18 @@ const Signup1 = () => {
       setPasswordError("");
     }
   }
+  function handleFocus(){
+    setIsHighlighted(true);
+  }
+  function handleBlur(){
+    setIsHighlighted(false);
+  }
+  function handleFocus1(){
+    setIsHighlighted1(true);
+  }
+  function handleBlur1(){
+    setIsHighlighted1(false);
+  }
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -115,21 +138,26 @@ const Signup1 = () => {
           <label className="form-label">Email address</label>
           <input
             type="email"
-            className="form-control"
+            className="form-control" id={isHighlighted?"highlight":""}
             aria-describedby="emailHelp" required
-            onChange={handleEmailChange}
-          />
+            onChange={handleEmailChange} onFocus={handleFocus} onBlur={handleBlur}
+            />
+          
           {emailError && <span style={{ color: 'red' }}>{emailError}</span>}
         </div>
         <div className="mb-3">
           <label className="form-label">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            aria-describedby="emailHelp" required
-            onChange={handlePasswordChange}
-          />
-          {passwordError && <span style={{ color: 'red' }}>{passwordError}</span>}
+          <div className="input-group "> 
+            <input type={passwordType} id={isHighlighted1 ? "highlight1" : ""} onChange={handlePasswordChange} name="password" class="form-control" placeholder="Password" onFocus={handleFocus1} onBlur={handleBlur1} />
+            
+            <div className="input-group-btn">
+              <button className="btn btn-outline-primary" onClick={togglePassword}>
+                {passwordType === "password" ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+         
+          </div> 
+          {passwordError && <span style={{ color: 'red' }}>{passwordError}</span>}  <br />
         </div>
 
         <button

@@ -16,13 +16,16 @@ const Contact= () => {
   const [number, setNumber] = useState("");
   const [information, setInformation] = useState("");
   const[isHighlighted,setIsHighlighted]=useState(false);
-
-
+  const[isHighlighted1,setIsHighlighted1]=useState(false);
+  const[isHighlighted2,setIsHighlighted2]=useState(false);
+  const[isHighlighted3,setIsHighlighted3]=useState(false);
+  const[isHighlighted4,setIsHighlighted4]=useState(false);
+  
   const [nameError, setNameError] = useState("");
   const [companyError, setCompanyError] = useState("");
   const[emailError,setEmailError]=useState("");
   const[numberError,setNumberError]=useState("");
-  const[informationError,setInformationError]=useState("");
+  
 
   const handleSubmit = (e) => {
 
@@ -36,8 +39,7 @@ const Contact= () => {
     setEmailError("please enter company email")
     if(number==='')
     setNumberError("please enter your number");
-    if(information==='')
-    setInformationError("please enter some information")
+    
 };
 
   const handleNameChange = (event) => {
@@ -72,19 +74,36 @@ const Contact= () => {
         setNumberError("");
       }
     }
-    const handleMoreInformationChange = (event) => {
-      setInformation(event.target.value);
-      if (event.target.value === '')
-        setInformationError("please enter your some Information");
-      else {
-        setInformationError("");
-      }
-    }
+    
     function handleFocus(){
       setIsHighlighted(true);
     }
     function handleBlur(){
       setIsHighlighted(false);
+    }
+    function handleFocus1(){
+      setIsHighlighted1(true);
+    }
+    function handleBlur1(){
+      setIsHighlighted1(false);
+    }
+    function handleFocus2(){
+      setIsHighlighted2(true);
+    }
+    function handleBlur2(){
+      setIsHighlighted2(false);
+    }
+    function handleFocus3(){
+      setIsHighlighted3(true);
+    }
+    function handleBlur3(){
+      setIsHighlighted3(false);
+    }
+    function handleFocus4(){
+      setIsHighlighted4(true);
+    }
+    function handleBlur4(){
+      setIsHighlighted4(false);
     }
   return (
     <>
@@ -106,9 +125,9 @@ const Contact= () => {
           <label className="form-label">Company Name</label>
           <input
             type="text"
-            className="form-control" id={isHighlighted?"highlight1":""}
+            className="form-control" id={isHighlighted1?"highlight1":""}
             placeholder="Enter your company name here"
-            onChange={handleCompanyChange}    onFocus={handleFocus} onBlur={handleBlur}
+            onChange={handleCompanyChange}    onFocus={handleFocus1} onBlur={handleBlur1}
           />
           {companyError && <span style={{ color: 'red' }}>{companyError}</span>}
         </div>
@@ -116,9 +135,9 @@ const Contact= () => {
           <label className="form-label">Company Email</label>
           <input
             type="email"
-            className="form-control" id={isHighlighted?"highlight2":""}
+            className="form-control" id={isHighlighted2?"highlight2":""}
             placeholder="Enter your email here"
-            onChange={handleEmail1Change}    onFocus={handleFocus} onBlur={handleBlur}
+            onChange={handleEmail1Change}    onFocus={handleFocus2} onBlur={handleBlur2}
           />
           {emailError && <span style={{ color: 'red' }}>{emailError}</span>}
         </div>
@@ -126,9 +145,9 @@ const Contact= () => {
           <label className="form-label">Phone Number</label>
           <input
             type="number"
-            className="form-control" id={isHighlighted?"highlight3":""}
+            className="form-control" id={isHighlighted3?"highlight3":""}
             placeholder="Enter your preferred phone number here"
-            onChange={ handlePhoneChange}    onFocus={handleFocus} onBlur={handleBlur}
+            onChange={ handlePhoneChange}    onFocus={handleFocus3} onBlur={handleBlur3}
           />
           {numberError && <span style={{ color: 'red' }}>{numberError}</span>}
         </div>
@@ -136,9 +155,9 @@ const Contact= () => {
           <label className="form-label">More Information</label>
           <input
             type="text"
-            className="form-control" id={isHighlighted?"highlight4":""}
+            className="form-control" id={isHighlighted4?"highlight4":""}
             placeholder="Add Your Query and context in this box"
-            onChange={handleMoreInformationChange }    onFocus={handleFocus} onBlur={handleBlur}
+            onChange={(e)=>{setInformation(e.target.value)}}   onFocus={handleFocus4} onBlur={handleBlur4}
             
           />
           {/* {informationError && <span style={{ color: 'red' }}>{informationError}</span>} */}
