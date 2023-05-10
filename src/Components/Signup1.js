@@ -8,15 +8,15 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavDropdown } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import PasswordStrengthBar from 'react-password-strength-bar';
-import Validate from "./Validate";
+
+
 
 const Signup1 = () => {
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [isHighlighted1, setIsHighlighted1] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
+  const [passwordStrength, setPasswordStrength] = useState('')
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [passwordType, setPasswordType] = useState("password");
@@ -77,6 +77,28 @@ const Signup1 = () => {
       setEmailError("");
     }
   }
+  const validatePassword = (value) => {
+    // Regular expressions to check for password characteristics
+    const uppercaseRegex = /[A-Z]/;
+    const lowercaseRegex = /[a-z]/;
+    const specialCharRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+
+    let strength = '';
+
+    if (value.length < 8) {
+      strength = 'Password should have a minimum of 8 characters.';
+    } else if (!uppercaseRegex.test(value)) {
+      strength = 'Password should contain at least one uppercase letter.';
+    } else if (!lowercaseRegex.test(value)) {
+      strength = 'Password should contain at least one lowercase letter.';
+    } else if (!specialCharRegex.test(value)) {
+      strength = 'Password should contain at least one special character.';
+    } else {
+      strength = 'Password is strong.';
+    }
+
+    setPasswordStrength(strength);
+  };
   const handlePasswordChange = (evnt) => {
     setPassword(evnt.target.value);
     if (evnt.target.value === '' || password=== "")
@@ -84,6 +106,9 @@ const Signup1 = () => {
     else {
       setPasswordError("");
     }
+    const value = evnt.target.value;
+    setPassword(value);
+    validatePassword(value);
   }
   function handleFocus() {
     setIsHighlighted(true);
@@ -137,7 +162,9 @@ const Signup1 = () => {
         </div>
         <div className="mb-3">
           <label className="form-label">Password</label>
-          <div className="input-group"> 
+          
+           <div className="input-group">  
+         
             <input type={passwordType} id={isHighlighted1 ? "highlight1" : ""} onChange={handlePasswordChange} name="password" class="form-control" placeholder="Password" onFocus={handleFocus1} onBlur={handleBlur1}   />
            
             <div className="input-group-btn">
@@ -145,12 +172,15 @@ const Signup1 = () => {
                 {passwordType === "password" ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-           
+          
           </div> 
-          <PasswordStrengthBar password={password}/>
-          {passwordError && <span style={{ color: 'red' }}>{passwordError}</span>}  <br />
+          
+          <div>{passwordStrength}</div>
+          {passwordError && <span style={{ color: 'red' }}>{passwordError}</span>}  <br /> 
+        
+             
         </div>
-
+       
         <button
           type="submit"
           className="btn btn-primary"
@@ -160,6 +190,7 @@ const Signup1 = () => {
         </button>
         <ToastContainer autoClose={8000} />
       </form>
+
     </>
   );
 };
